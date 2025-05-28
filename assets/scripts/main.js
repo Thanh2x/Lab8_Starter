@@ -62,7 +62,7 @@ function initializeServiceWorker() {
         // B5 - In the event that the service worker registration fails, console
         //            log that it has failed.
         .catch((error) => {
-          console.error('FAILED TO REGISTER SERVICE WORKER', error);
+          console.log('FAILED TO REGISTER SERVICE WORKER', error);
         });
       // STEPS B6 ONWARDS WILL BE IN /sw.js
     });
@@ -103,7 +103,6 @@ async function getRecipes() {
     // A4. TODO - Loop through each recipe in the RECIPE_URLS array constant
     //            declared above
     for (let i = 0; i < RECIPE_URLS.length; i++) {
-      const recipe_url = RECIPE_URLS[i];
       // A5. TODO - Since we are going to be dealing with asynchronous code, create
       //            a try / catch block. A6-A9 will be in the try portion, A10-A11
       //            will be in the catch portion.
@@ -112,7 +111,7 @@ async function getRecipes() {
         //            article on fetch(). NOTE: Fetches are ASYNCHRONOUS, meaning that
         //            you must either use "await fetch(...)" or "fetch.then(...)". This
         //            function is using the async keyword so we recommend "await"
-        const response = await fetch(recipe_url);
+        const response = await fetch(RECIPE_URLS[i]);
         // A7. TODO - For each fetch response, retrieve the JSON from it using .json().
         //            NOTE: .json() is ALSO asynchronous, so you will need to use
         //            "await" again

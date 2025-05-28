@@ -4,7 +4,7 @@
   "description": "Recipe web app that lets you use it offline",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#AB271B",
+  "background_color": "white",
   "theme_color": "#ffffff",
   "icons": [
     {
