@@ -56,28 +56,20 @@ function initializeServiceWorker() {
         .then((registration) => {
           // B4 - Once the service worker has been successfully registered, console
           //            log that it was successful.
-          console.log('SUCCESSFULLY REGISTERD');
+          console.log('REGISTERED SUCCESSFULLY');
         })
 
         // B5 - In the event that the service worker registration fails, console
         //            log that it has failed.
         .catch((error) => {
-<<<<<<< HEAD
-          console.error('FAILED TO REGISTER', error);
-=======
-          console.log("Failed registrating");
->>>>>>> parent of 8780cc7 (I am commiting)
+          console.error('FAILED TO REGISTER SERVICE WORKER', error);
         });
       // STEPS B6 ONWARDS WILL BE IN /sw.js
     });
-<<<<<<< HEAD
   } else {
-    console.warn('REGISTER WORK NOT SUPPORTED');
-=======
->>>>>>> parent of 8780cc7 (I am commiting)
+    console.warn('SERVICE WORKER NOT SUPPORTED');
   }
 }
-
 /**
  * Reads 'recipes' from localStorage and returns an array of
  * all of the recipes found (parsed, not in string form). If
@@ -96,33 +88,24 @@ async function getRecipes() {
     return JSON.parse(recipesFS);
   }
   /**************************/
-
   // The rest of this method will be concerned with requesting the recipes
   // from the network
-
   // A2. TODO - Create an empty array to hold the recipes that you will fetch
-<<<<<<< HEAD
   const recipes = [];
-
-=======
-  const recipesToFetch = [];
->>>>>>> parent of 8780cc7 (I am commiting)
   // A3. TODO - Return a new Promise. If you are unfamiliar with promises, MDN
   //            has a great article on them. A promise takes one parameter - A
   //            function (we call these callback functions). That function will
   //            take two parameters - resolve, and reject. These are functions
   //            you can call to either resolve the Promise or Reject it.
   return new Promise(async (resolve, reject) => {
-
     /**************************/
     // A4-A11 will all be *inside* the callback function we passed to the Promise
     // we're returning
     /**************************/
-
     // A4. TODO - Loop through each recipe in the RECIPE_URLS array constant
     //            declared above
     for (let i = 0; i < RECIPE_URLS.length; i++) {
-      const UrlArr = RECIPE_URLS[i];
+      const recipe_url = RECIPE_URLS[i];
       // A5. TODO - Since we are going to be dealing with asynchronous code, create
       //            a try / catch block. A6-A9 will be in the try portion, A10-A11
       //            will be in the catch portion.
@@ -131,35 +114,24 @@ async function getRecipes() {
         //            article on fetch(). NOTE: Fetches are ASYNCHRONOUS, meaning that
         //            you must either use "await fetch(...)" or "fetch.then(...)". This
         //            function is using the async keyword so we recommend "await"
-        const response = await fetch(UrlArr);
+        const response = await fetch(recipe_url);
         // A7. TODO - For each fetch response, retrieve the JSON from it using .json().
         //            NOTE: .json() is ALSO asynchronous, so you will need to use
         //            "await" again
-
-        const data = await response.json();
-
+        const recipe = await response.json();
         // A8. TODO - Add the new recipe to the recipes array
-<<<<<<< HEAD
-        recipes.push(data);
-
-=======
-        recipesToFetch.push(data);
->>>>>>> parent of 8780cc7 (I am commiting)
+        recipes.push(recipe);
         // A9. TODO - Check to see if you have finished retrieving all of the recipes,
         //            if you have, then save the recipes to storage using the function
         //            we have provided. Then, pass the recipes array to the Promise's
         //            resolve() method.
-        if (recipesToFetch.length === RECIPE_URLS.length) {
-          saveRecipesToStorage(recipesToFetch);
-          resolve(recipesToFetch);
+        if (recipes.length === RECIPE_URLS.length) {
+          saveRecipesToStorage(recipes);
+          resolve(recipes);
         }
       } catch (error) {
-<<<<<<< HEAD
         // A10. TODO - Log any errors from catch using console.error
-        console.error('ERROR FETCHING', error);
-=======
-        console.error(error);
->>>>>>> parent of 8780cc7 (I am commiting)
+        console.error('FETCHING ERROR', error);
         // A11. TODO - Pass any errors to the Promise's reject() function
         reject(error);
       }
