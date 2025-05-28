@@ -60,9 +60,12 @@ function initializeServiceWorker() {
         // B5. TODO - In the event that the service worker registration fails, console
         //            log that it has failed.
         .catch((error) => {
-          console.log("Failed registrating");
+          console.error('Failed registrating', error);
+          console.log('Failed registrating');
         });
     });
+  } else {
+    console.warn('Not supported');
   }
   // STEPS B6 ONWARDS WILL BE IN /sw.js
 }
@@ -87,7 +90,7 @@ async function getRecipes() {
   // The rest of this method will be concerned with requesting the recipes
   // from the network
   // A2. TODO - Create an empty array to hold the recipes that you will fetch
-  const recipesToFetch = [];
+  const recipes = [];
   // A3. TODO - Return a new Promise. If you are unfamiliar with promises, MDN
   //            has a great article on them. A promise takes one parameter - A
   //            function (we call these callback functions). That function will
@@ -116,18 +119,18 @@ async function getRecipes() {
         //            "await" again
         const data = await response.json();
         // A8. TODO - Add the new recipe to the recipes array
-        recipesToFetch.push(data);
+        recipes.push(data);
         // A9. TODO - Check to see if you have finished retrieving all of the recipes,
         //            if you have, then save the recipes to storage using the function
         //            we have provided. Then, pass the recipes array to the Promise's
         //            resolve() method.
-        if (recipesToFetch.length === RECIPE_URLS.length) {
-          saveRecipesToStorage(recipesToFetch);
-          resolve(recipesToFetch);
+        if (recipes.length === RECIPE_URLS.length) {
+          saveRecipesToStorage(recipes);
+          resolve(recipes);
         }
         // A10. TODO - Log any errors from catch using console.error
       } catch (error) {
-        console.error(error);
+        console.error('error fectching', error);
         // A11. TODO - Pass any errors to the Promise's reject() function
         reject(error);
       }
