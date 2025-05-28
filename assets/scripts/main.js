@@ -66,8 +66,6 @@ function initializeServiceWorker() {
         });
       // STEPS B6 ONWARDS WILL BE IN /sw.js
     });
-  } else {
-    console.warn('SERVICE WORKER NOT SUPPORTED');
   }
 }
 /**
