@@ -4,8 +4,8 @@
   "description": "Recipe card web app",
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "aliceblue",
-  "theme_color": "rebeccapurple",
+  "background_color": "#AB2222",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "/Lab8_Starter/assets/images/icons/icon-192x192.png",

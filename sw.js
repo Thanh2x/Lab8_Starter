@@ -43,6 +43,7 @@ self.addEventListener('fetch', function (event) {
   /*******************************/
   // B7 - Respond to the event by opening the cache using the name we gave
   //            above (CACHE_NAME)
+<<<<<<< HEAD
   event.respondWith(
     caches.open(CACHE_NAME).then(function (cache) {
       // B8 - If the request is in the cache, return with the cached version.
@@ -56,7 +57,24 @@ self.addEventListener('fetch', function (event) {
           cache.put(event.request, reponseNetwork.clone());
           return reponseNetwork;
         });
+=======
+  event.respondWith(caches.open(CACHE_NAME).then(function (cache) {
+    // B8 - If the request is in the cache, return with the cached version.
+    //            Otherwise fetch the resource, add it to the cache, and return
+    //            network response.
+    return cache.match(event.request).then(function (cachedRes) {
+      // if the request is in the chace return with the cached version
+      if (cachedRes) {
+        return cachedRes;
+      }
+      // otherwise fetch the resource
+      return fetch(event.request).then(function (networkRes) {
+        // add to cache and return
+        cache.put(event.request, networkRes.clone());
+        return networkRes;
+>>>>>>> parent of 8780cc7 (I am commiting)
       });
-    })
+    });
+  })
   );
 });

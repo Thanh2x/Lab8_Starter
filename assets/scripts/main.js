@@ -62,12 +62,19 @@ function initializeServiceWorker() {
         // B5 - In the event that the service worker registration fails, console
         //            log that it has failed.
         .catch((error) => {
+<<<<<<< HEAD
           console.error('FAILED TO REGISTER', error);
+=======
+          console.log("Failed registrating");
+>>>>>>> parent of 8780cc7 (I am commiting)
         });
       // STEPS B6 ONWARDS WILL BE IN /sw.js
     });
+<<<<<<< HEAD
   } else {
     console.warn('REGISTER WORK NOT SUPPORTED');
+=======
+>>>>>>> parent of 8780cc7 (I am commiting)
   }
 }
 
@@ -94,8 +101,12 @@ async function getRecipes() {
   // from the network
 
   // A2. TODO - Create an empty array to hold the recipes that you will fetch
+<<<<<<< HEAD
   const recipes = [];
 
+=======
+  const recipesToFetch = [];
+>>>>>>> parent of 8780cc7 (I am commiting)
   // A3. TODO - Return a new Promise. If you are unfamiliar with promises, MDN
   //            has a great article on them. A promise takes one parameter - A
   //            function (we call these callback functions). That function will
@@ -128,19 +139,27 @@ async function getRecipes() {
         const data = await response.json();
 
         // A8. TODO - Add the new recipe to the recipes array
+<<<<<<< HEAD
         recipes.push(data);
 
+=======
+        recipesToFetch.push(data);
+>>>>>>> parent of 8780cc7 (I am commiting)
         // A9. TODO - Check to see if you have finished retrieving all of the recipes,
         //            if you have, then save the recipes to storage using the function
         //            we have provided. Then, pass the recipes array to the Promise's
         //            resolve() method.
-        if (recipes.length === RECIPE_URLS.length) {
-          saveRecipesToStorage(recipes);
-          resolve(recipes);
+        if (recipesToFetch.length === RECIPE_URLS.length) {
+          saveRecipesToStorage(recipesToFetch);
+          resolve(recipesToFetch);
         }
       } catch (error) {
+<<<<<<< HEAD
         // A10. TODO - Log any errors from catch using console.error
         console.error('ERROR FETCHING', error);
+=======
+        console.error(error);
+>>>>>>> parent of 8780cc7 (I am commiting)
         // A11. TODO - Pass any errors to the Promise's reject() function
         reject(error);
       }
