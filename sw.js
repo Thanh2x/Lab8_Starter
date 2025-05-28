@@ -42,22 +42,21 @@ self.addEventListener('fetch', function (event) {
   /*******************************/
   // B7 - Respond to the event by opening the cache using the name we gave
   //            above (CACHE_NAME)
-  event.respondWith(
-    caches.open(CACHE_NAME).then(function (cache) {
-      // B8 - If the request is in the cache, return with the cached version.
-      //            Otherwise fetch the resource, add it to the cache, and return
-      //            network response.
-      return cache.match(event.request).then(function (responseCached) {
-        // if request in cahce return
-        if (responseCached) {
-          return responseCached;
-        }
-        // else fetch the resource and add to chace and return
-        return fetch(event.request).then(function (responseCached) {
-          cache.put(event.request, responseCached.clone());
-          return responseCached;
-        });
+  event.respondWith(caches.open(CACHE_NAME).then(function (cache) {
+    // B8 - If the request is in the cache, return with the cached version.
+    //            Otherwise fetch the resource, add it to the cache, and return
+    //            network response.
+    return cache.match(event.request).then(function (responseCached) {
+      // if request in cahce return
+      if (responseCached) {
+        return responseCached;
+      }
+      // else fetch the resource and add to chace and return
+      return fetch(event.request).then(function (responseCached) {
+        cache.put(event.request, responseCached.clone());
+        return responseCached;
       });
-    })
+    });
+  })
   );
 });
